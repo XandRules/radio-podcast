@@ -1,0 +1,19 @@
+{
+  "podcast": [
+    {
+      "id": "89.9",
+      "title": "json-server",
+      "description": "typicode"
+    },
+    {
+      "id": "92.5",
+      "title": "radio 2",
+      "description": "typicode 45"
+    },
+    {
+      "id": "98.1",
+      "title": "radio 3",
+      "description": "typicode yiyi 45"
+    }
+  ]
+}

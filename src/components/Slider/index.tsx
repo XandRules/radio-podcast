@@ -1,0 +1,81 @@
+import React, { useState } from "react";
+import { IPodcast } from "../../types/podcast";
+import { Container } from "./style";
+
+interface Props {
+  podcastList: IPodcast[];
+  setFavorites: React.Dispatch<React.SetStateAction<IPodcast[]>>;
+}
+
+function Slider({ podcastList, setFavorites }: Props) {
+  const [podcast, setPodcast] = useState<IPodcast>({
+    id: "87",
+    title: "",
+    description: "",
+    img: "",
+  });
+
+  function adicionarFavorito(evento: React.FormEvent<HTMLFormElement>) {
+    evento.preventDefault();
+    setFavorites((oldFavorites) => [...oldFavorites, { ...podcast }]);
+    console.log(podcast);
+  }
+
+  return (
+    <Container>
+      <div className="card">
+        <form onSubmit={adicionarFavorito}>
+          <div className="topCard">
+            <h2>SINTONIZE SUA FREQUÊNICIA</h2>
+          </div>
+          <div className="mediaCard">
+            <input
+              type="range"
+              min={87}
+              max={107.9}
+              value={podcast.id}
+              step="0.1"
+              className="slider"
+              onChange={(evento) => {
+                setPodcast({
+                  id: evento.target.value,
+                  title: "PODCAST 1",
+                  description: "DESCRIÇÃO DO PODCAST 1",
+                  img: "",
+                });
+              }}
+            />
+            <div className="value">{podcast.id}</div>
+
+            <div className="img-bottom">
+              {podcastList.find((p) => p.id === podcast.id) ? (
+                <ul className="list">
+                  {podcastList
+                    .filter((p) => p.id === podcast.id)
+                    .map((pod) => (
+                      <>
+                        <li key={pod.id} id="title-podcast"><strong>{pod.title}</strong></li>
+                        <li><img src={pod.img} className="img-podcast" alt="hipsters" /></li>
+                      </>
+                    ))}
+                    
+                  <div className="bottomCard">
+                    <button type="submit">ADICIONAR FAVORITO</button>
+                  </div>
+                </ul>
+              ) : (
+                <div>
+                  <br />
+                  <p>Nenhuma rádio sintonizada.</p>
+                </div>
+              )}
+             
+            </div>
+          </div>
+        </form>
+      </div>
+    </Container>
+  );
+}
+
+export default Slider;
