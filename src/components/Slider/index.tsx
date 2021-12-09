@@ -52,13 +52,21 @@ function Slider({ podcastList, setFavorites }: Props) {
                 <ul className="list">
                   {podcastList
                     .filter((p) => p.id === podcast.id)
-                    .map((pod) => (
+                    .map((p) => (
                       <>
-                        <li key={pod.id} id="title-podcast"><strong>{pod.title}</strong></li>
-                        <li><img src={pod.img} className="img-podcast" alt="hipsters" /></li>
+                        <li key={p.id} id="title-podcast">
+                          <strong>{p.title}</strong>
+                        </li>
+                        <li>
+                          <img
+                            src={p.img}
+                            className="img-podcast"
+                            alt="hipsters"
+                          />
+                        </li>
                       </>
                     ))}
-                    
+
                   <div className="bottomCard">
                     <button type="submit">ADICIONAR FAVORITO</button>
                   </div>
@@ -69,7 +77,6 @@ function Slider({ podcastList, setFavorites }: Props) {
                   <p>Nenhuma rádio sintonizada.</p>
                 </div>
               )}
-             
             </div>
           </div>
         </form>
