@@ -27,7 +27,7 @@ function Slider({ podcastList, setFavorites }: Props) {
      setPodcast(data[0])
 
 
-    setFavorites((oldFavorites) => [...oldFavorites, { ...podcast }]);
+    setFavorites((oldFavorites) => [...oldFavorites, data[0] ]);
     console.log(podcast);
   }
 
