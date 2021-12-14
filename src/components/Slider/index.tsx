@@ -8,6 +8,7 @@ interface Props {
 }
 
 function Slider({ podcastList, setFavorites }: Props) {
+
   const [podcast, setPodcast] = useState<IPodcast>({
     id: "87",
     title: "",
@@ -17,6 +18,15 @@ function Slider({ podcastList, setFavorites }: Props) {
 
   function adicionarFavorito(evento: React.FormEvent<HTMLFormElement>) {
     evento.preventDefault();
+    
+    const data = podcastList.filter((p) => (
+      p.id === podcast.id 
+      )
+    );
+     
+     setPodcast(data[0])
+
+
     setFavorites((oldFavorites) => [...oldFavorites, { ...podcast }]);
     console.log(podcast);
   }
@@ -39,20 +49,22 @@ function Slider({ podcastList, setFavorites }: Props) {
               onChange={(evento) => {
                 setPodcast({
                   id: evento.target.value,
-                  title: "PODCAST 1",
+                  title: "descrição",
                   description: "DESCRIÇÃO DO PODCAST 1",
                   img: "",
                 });
+                
               }}
             />
             <div className="value">{podcast.id}</div>
 
             <div className="img-bottom">
               {podcastList.find((p) => p.id === podcast.id) ? (
-                <ul className="list">
+                <ul className="list" key={podcast.id}>
                   {podcastList
                     .filter((p) => p.id === podcast.id)
                     .map((p) => (
+                    
                       <>
                         <li key={p.id} id="title-podcast">
                           <strong>{p.title}</strong>

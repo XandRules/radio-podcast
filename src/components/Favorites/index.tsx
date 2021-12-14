@@ -19,7 +19,7 @@ export function Favorites({ favorites }: Props) {
         <tbody>
           {favorites.map((f) => (
             <>
-              <tr>
+              <tr key={f.id}>
                 <td>{f.id}</td>
                 <td>{f.title}</td>
                 <td>{f.description}</td>
