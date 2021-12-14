@@ -31,7 +31,7 @@ function App() {
     <>
       <GlobalStyle />
       <Header />
-      <Slider podcastList={podcastList} setFavorites={setFavorites}></Slider>
+      <Slider podcastList={podcastList} setFavorites={setFavorites} favorites={favorites}></Slider>
       <Favorites favorites={favorites} />
     </>
   );

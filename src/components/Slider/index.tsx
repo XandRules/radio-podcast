@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IPodcast } from "../../types/podcast";
+import { Favorites } from "../Favorites";
 import { Container } from "./style";
 
 interface Props {
   podcastList: IPodcast[];
   setFavorites: React.Dispatch<React.SetStateAction<IPodcast[]>>;
+  favorites: IPodcast[];
 }
 
-function Slider({ podcastList, setFavorites }: Props) {
+function Slider({ podcastList, setFavorites, favorites }: Props) {
 
   const [podcast, setPodcast] = useState<IPodcast>({
     id: "87",
@@ -15,6 +17,13 @@ function Slider({ podcastList, setFavorites }: Props) {
     description: "",
     img: "",
   });
+
+  useEffect(() => {
+    const data = localStorage.getItem('favoritos');
+    if(data){
+      setFavorites(JSON.parse(data));
+    }
+  },[])
 
   function adicionarFavorito(evento: React.FormEvent<HTMLFormElement>) {
     evento.preventDefault();
@@ -26,9 +35,16 @@ function Slider({ podcastList, setFavorites }: Props) {
      
      setPodcast(data[0])
 
+     setFavorites((oldFavorites) =>  [...oldFavorites, data[0] ] );
 
-    setFavorites((oldFavorites) => [...oldFavorites, data[0] ]);
-    console.log(podcast);
+      if(favorites.length){
+        localStorage.setItem('favoritos',JSON.stringify(favorites));
+        
+      }else{
+        localStorage.setItem('favoritos',JSON.stringify([data[0]]));
+
+      }
+
   }
 
   return (
